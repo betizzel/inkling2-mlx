@@ -12,6 +12,8 @@ from typing import Any, Optional
 
 tool_call_start: str = "<|content_invoke_tool_json|>"
 tool_call_end: str = "<|end_message|>"
+# Regex for the role token and tool name the model writes before the marker.
+tool_call_header: str = r"(?:<\|message_model\|>)?[\w\-]*"
 
 
 def parse_tool_call(text: str, tools: Optional[Any] = None) -> dict:
