@@ -1,0 +1,17 @@
+inkling2-mlx: Inkling 2 Mini support for MLX-VLM
+
+This repository is MLX-VLM (https://github.com/Blaizzy/mlx-vlm, MIT License, see LICENSE), pinned at commit
+25ead5d2c72f509c03ff570cae2041cbf54fa408, plus three commits by NetProjects (Internet Projects Ltd):
+
+1. mlx_vlm/models/inkling2_loop/ and the DSpark drafter changes: support for Thinking Machines' looped Inkling 2 Mini
+   (model_type "inkling2_loop"). mlx_vlm/models/inkling2_loop/language.py is adapted for MLX from the Inkling2Loop
+   implementation in Hugging Face Transformers (Copyright 2026 the HuggingFace Team, Apache License 2.0, see
+   LICENSE-APACHE-2.0); the other new files are released under the same Apache License 2.0.
+2. mlx_vlm/utils.py: read per-tensor formats from hf_quant_config.json for mixed ModelOpt NVFP4 / MXFP8 checkpoints.
+3. mlx_vlm/tools/parsers/inkling.py: the Inkling tool-call parser.
+
+Inkling 2 Mini is a model by Thinking Machines Lab, Inc., released under the Apache License 2.0 together with the
+Thinking Machines Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/).
+
+Published by NetProjects (Internet Projects Ltd), https://netprojects.com.
+Not affiliated with Thinking Machines Lab, Hugging Face or the MLX-VLM authors.
