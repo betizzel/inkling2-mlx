@@ -7,6 +7,16 @@ from ....models.inkling2.config import TextConfig as TargetTextConfig
 @dataclass
 class TextConfig(TargetTextConfig):
     mtp_config: dict = field(default_factory=dict)
+    loop_config: dict | None = None
+
+
+def effective_num_layers(text):
+    """Decoder layer applications per token (Inkling2Loop repeats its core)."""
+    loop = text.get("loop_config") or {}
+    if not loop:
+        return text["num_hidden_layers"]
+    span = loop["core_end"] - loop["core_start"]
+    return text["num_hidden_layers"] + (loop["num_passes"] - 1) * span
 
 
 @dataclass
@@ -64,6 +74,6 @@ class ModelConfig(BaseModelConfig):
             len(ids) < 2
             or ids != sorted(set(ids))
             or ids[0] < 0
-            or ids[-1] != text["num_hidden_layers"]
+            or ids[-1] != effective_num_layers(text)
         ):
             raise ValueError("Invalid Inkling 2 DSpark target_layer_ids")

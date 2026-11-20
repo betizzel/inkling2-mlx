@@ -351,6 +351,8 @@ MTP_SPLITTERS: Dict[str, str] = {
     "inkling_mm_model": "mlx_vlm.speculative.drafters.inkling_mtp.split:InklingMTPSplitter",
     "inkling2": "mlx_vlm.speculative.drafters.inkling2_dspark.split:Inkling2DSparkSplitter",
     "inkling2_text": "mlx_vlm.speculative.drafters.inkling2_dspark.split:Inkling2DSparkSplitter",
+    "inkling2_loop": "mlx_vlm.speculative.drafters.inkling2_dspark.split:Inkling2DSparkSplitter",
+    "inkling2_loop_text": "mlx_vlm.speculative.drafters.inkling2_dspark.split:Inkling2DSparkSplitter",
 }
 
 
