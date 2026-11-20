@@ -139,3 +139,18 @@ def test_loop_dspark_greedy_is_lossless():
     expected = generated(target)
     assert generated(target, draft) == expected
     assert draft.draft_lens and sum(draft.draft_lens) > 0
+
+
+def test_inkling_tool_parser():
+    from mlx_vlm.tools.extractor import process_tool_calls
+    from mlx_vlm.tools.parsers import inkling
+    from mlx_vlm.tools.registry import _infer_tool_parser
+
+    assert _infer_tool_parser("{{ '<|content_invoke_tool_json|>' }}") == "inkling"
+    out = (
+        "<|message_model|>get_weather<|content_invoke_tool_json|>"
+        '{"args": {"city": "Athens"}, "name": "get_weather"}<|end_message|>'
+    )
+    result = process_tool_calls(out, inkling, tools=[])
+    assert result.calls[0]["function"]["name"] == "get_weather"
+    assert json.loads(result.calls[0]["function"]["arguments"]) == {"city": "Athens"}
