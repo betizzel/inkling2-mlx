@@ -602,6 +602,14 @@ python -m mlx_vlm.convert --hf-path <local_dir> --mlx-path <mlx_dir>
                 # Some ModelOpt MoE exports use fused, underscore-delimited
                 # tensor names handled by the model's sanitizer below.
                 quantization = {"group_size": 16, "bits": 4, "mode": "nvfp4"}
+                # Mixed exports (e.g. Inkling 2 Mini: NVFP4 + MXFP8 experts) describe
+                # per-tensor formats in hf_quant_config.json; prefer the model's reading.
+                hf_quant_path = model_path / "hf_quant_config.json"
+                if hf_quant_path.exists() and hasattr(model, "quantization_from_metadata"):
+                    with open(hf_quant_path) as f:
+                        native_quantization = model.quantization_from_metadata(json.load(f))
+                    if native_quantization is not None:
+                        quantization = native_quantization
             elif (
                 quant_method == "modelopt"
                 and quantization_config.get("quant_algo") == "MXFP8"
