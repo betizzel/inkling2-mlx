@@ -96,4 +96,4 @@ MLX-VLM is under the MIT License (`LICENSE`). The Inkling tool-call parser is un
 (`LICENSE-APACHE-2.0`); `NOTICE` describes it and the history of this repository. Inkling 2 Mini itself is Apache-2.0 with Thinking Machines'
 [Model Acceptable Use Policy](https://thinkingmachines.ai/model-acceptable-use-policy/).
 
-MLX-VLM's own README is in [`README-mlx-vlm.md`](README-mlx-vlm.md).
+MLX-VLM's own documentation: [github.com/Neywa-Labs/mlx-vlm](https://github.com/Neywa-Labs/mlx-vlm) (MIT License, see `LICENSE`).
