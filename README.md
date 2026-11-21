@@ -59,8 +59,12 @@ DSpark speculative decoding, with the draft bundled in the model repository:
 ```python
 from mlx_vlm.speculative.drafters import load_drafter
 draft, kind = load_drafter("netprojects/Inkling-2-Mini-MLX-4-8bit")
-print(generate(model, processor, prompt, max_tokens=2048, draft_model=draft, draft_kind=kind).text)
+print(generate(model, processor, prompt, max_tokens=2048, draft_model=draft, draft_kind=kind, draft_block_size=4).text)
 ```
+
+A block size of 3–4 is fastest on this model (the draft's default of 8 is slower). On an idle MacBook Pro M5 Max, generation
+with DSpark was ×1.29 (4-8bit, block 3) to ×1.84 (2.5bit, block 4) faster; the model cards have the full speed tables.
+Server: add `--draft-model <same repo> --draft-kind dflash --draft-block-size 4`.
 
 OpenAI-compatible server (tool calls returned as `tool_calls`, thinking as `reasoning_content`):
 
