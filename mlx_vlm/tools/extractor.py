@@ -31,9 +31,7 @@ def process_tool_calls(
             tool_module.tool_call_start
         )
         if tool_module.tool_call_end == "":
-            pattern = re.compile(
-                f"{start}.*?(?:\n|$)", re.DOTALL
-            )
+            pattern = re.compile(f"{start}.*?(?:\n|$)", re.DOTALL)
         else:
             pattern = re.compile(
                 f"{start}.*?{re.escape(tool_module.tool_call_end)}",

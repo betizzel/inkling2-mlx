@@ -2953,6 +2953,8 @@ WIRE_CALLS = {
     "gemma4": '<|tool_call>call:get_weather{city:<|"|>Paris<|"|>,days:3}<tool_call|>',
     "glm47": "<tool_call>get_weather<arg_key>city</arg_key><arg_value>Paris</arg_value>"
     "<arg_key>days</arg_key><arg_value>3</arg_value></tool_call>",
+    "inkling": '<|content_invoke_tool_json|>{"name":"get_weather",'
+    '"args":{"city":"Paris","days":3}}<|end_message|>',
     "json_tools": '<tool_call>{"name":"get_weather",'
     '"arguments":{"city":"Paris","days":3}}</tool_call>',
     "kimi_k2": "<|tool_calls_section_begin|><|tool_call_begin|>functions.get_weather:0"
