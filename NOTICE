@@ -1,0 +1,18 @@
+inkling2-mlx: MLX-VLM with Inkling tool calls
+
+This repository is MLX-VLM (https://github.com/Neywa-Labs/mlx-vlm, formerly Blaizzy/mlx-vlm, MIT License, see LICENSE),
+pinned at commit fd6404fb3261102600541127d59103dac65c2756, which already includes Inkling 2 Mini support (pull request
+#2778), plus one addition by NetProjects (Internet Projects Ltd):
+
+- mlx_vlm/tools/parsers/inkling.py, its registry entry and a small change in mlx_vlm/tools/extractor.py: the Inkling
+  tool-call format, so mlx_vlm.server returns OpenAI tool_calls for Inkling models. These additions are released under the
+  Apache License 2.0 (see LICENSE-APACHE-2.0).
+
+Versions up to v0.1.0 carried NetProjects' own Inkling 2 Mini model code (adapted from Hugging Face Transformers'
+Inkling2Loop implementation, Apache License 2.0); from v0.2.0 the upstream MLX-VLM implementation is used instead.
+
+Inkling 2 Mini is a model by Thinking Machines Lab, Inc., released under the Apache License 2.0 together with the
+Thinking Machines Model Acceptable Use Policy (https://thinkingmachines.ai/model-acceptable-use-policy/).
+
+Published by NetProjects (Internet Projects Ltd), https://netprojects.com.
+Not affiliated with Thinking Machines Lab, Hugging Face or the MLX-VLM authors.
