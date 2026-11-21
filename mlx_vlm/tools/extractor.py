@@ -25,13 +25,18 @@ def process_tool_calls(
     remaining = model_output
 
     if tool_module.tool_call_start in model_output:
+        # A format may name the tool before its start marker; that header is
+        # part of the call, not of the visible content.
+        start = getattr(tool_module, "tool_call_header", "") + re.escape(
+            tool_module.tool_call_start
+        )
         if tool_module.tool_call_end == "":
             pattern = re.compile(
-                f"{re.escape(tool_module.tool_call_start)}.*?(?:\n|$)", re.DOTALL
+                f"{start}.*?(?:\n|$)", re.DOTALL
             )
         else:
             pattern = re.compile(
-                f"{re.escape(tool_module.tool_call_start)}.*?{re.escape(tool_module.tool_call_end)}",
+                f"{start}.*?{re.escape(tool_module.tool_call_end)}",
                 re.DOTALL,
             )
 
@@ -39,10 +44,10 @@ def process_tool_calls(
         if matches:
             remaining = re.sub(pattern, " ", model_output).strip()
             for match in matches:
-                call = (
-                    match.strip()
-                    .removeprefix(tool_module.tool_call_start)
-                    .removesuffix(tool_module.tool_call_end)
+                call = match.strip()
+                call = call[call.find(tool_module.tool_call_start) :]
+                call = call.removeprefix(tool_module.tool_call_start).removesuffix(
+                    tool_module.tool_call_end
                 )
                 try:
                     parsed = tool_module.parse_tool_call(call, tools)
