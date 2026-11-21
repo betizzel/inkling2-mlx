@@ -74,15 +74,15 @@ mlx_vlm.server --model netprojects/Inkling-2-Mini-MLX-4-8bit --port 8000
 
 ## Checks
 
-On a MacBook Pro M5 Max (128 GB), 20 November 2026, against Thinking Machines' Transformers implementation (pull request
+On a MacBook Pro M5 Max (128 GB), 21 November 2026, with this repository's MLX-VLM (`fd6404f`), against Thinking Machines' Transformers implementation (pull request
 #51050) running on the CPU with the released weights, 12 short chat texts (488 answer positions):
 
 | Build | Same next token | Mean KL | GSM8K (50, reasoning `none`) |
 |---|---|---|---|
-| 4-8bit (the release in this MLX-VLM) | 98.6% | 0.0018 | 47/50 |
+| 4-8bit (the release, lossless) | 98.4% | 0.0018 | 47/50 |
 | 4bit | 95.9% | 0.029 | 47/50 |
-| 3bit | 95.7% | 0.042 | 48/50 |
-| 2.5bit | 87.3% | 0.190 | 45/50 |
+| 3bit | 95.5% | 0.042 | 48/50 |
+| 2.5bit | 87.5% | 0.190 | 45/50 |
 
 The 4-8bit build's greedy answers to 3 prompts match Thinking Machines' code token for token (24 tokens each).
 Tool calls, coding tasks, thinking and image prompts pass on every build. 
